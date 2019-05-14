@@ -7,12 +7,7 @@ project 1 - A Random Quote Generator
 
 
 /***
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
+Created quotes object array
 ***/
 let quotes = [
   {
@@ -45,9 +40,10 @@ let quotes = [
 ]
 
 /***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number
-   - Cse the random number to `return` a random quote object from the `quotes` array.
+Created getRandomQuote function
+1. It pick a quote from quotes array
+2. If picked quote is same with prev quote, it implement fucntion again until it pick quote different with prev one
+(by 재귀함수)
 ***/
 let prevIndex = 0 ;
 function getRandomQuote(quotes) {
@@ -57,31 +53,26 @@ function getRandomQuote(quotes) {
     prevIndex = index;
     return quotes[index];
   } else {
-    return getRandomQuote(quotes);
+    return getRandomQuote(quotes); // 재귀를 할때는 꼭 return 함수를 넣어 줘야한다.
   }
 
 }
 
 /***
-  Create the `printQuote` function to:
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string.
+  Create printQuote funtion
+  1. It select whole 'quote-box' div element and change it
+  2. I made htmlStr
+  3. I made if statement to check citation and year keyword's existance.
 ***/
 function printQuote() {
   let quote = getRandomQuote(quotes);
-  console.log(quote);
   let htmlStr = `<p class="quote">${quote.quote}</p>
   <p class="source">${quote.source}`;
+
   if(quote.citation) {
     htmlStr +=`<span class="citation">${quote.citation}</span>`;
   }
+
   if(quote.year){
     htmlStr +=`<span class="year">${quote.year}</span>`;
   }
@@ -97,16 +88,8 @@ function printQuote() {
 
 
 /***
-  When the "Show another quote" button is clicked, the event listener
-  below will be triggered, and it will call, or "invoke", the `printQuote`
-  function. So do not make any changes to the line of code below this
-  comment.
+ Select the button element and add Event listener for click event ( it changes the quote printed)
 ***/
 
 let changeButton = document.getElementById('loadQuote');
 changeButton.addEventListener("click", printQuote, false);
-
-//document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
