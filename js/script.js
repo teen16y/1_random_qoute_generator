@@ -36,7 +36,7 @@ let quotes = [
     source:"Joseph Campbell"
   },
   {
-    quote:"risking nothing is risking everything",
+    quote:"Risking nothing is risking everything",
     source:"Youngjin Ha",
     citation:"On his room",
     year:"2019"
@@ -49,9 +49,17 @@ let quotes = [
    - Create a variable to store a random number
    - Cse the random number to `return` a random quote object from the `quotes` array.
 ***/
+let prevIndex = 0 ;
 function getRandomQuote(quotes) {
   let index = Math.floor(Math.random()*quotes.length)
-  return quotes[index];
+  console.log(`prev: ${prevIndex} / index: ${index}`);
+  if( index !== prevIndex ) {
+    prevIndex = index;
+    return quotes[index];
+  } else {
+    return getRandomQuote(quotes);
+  }
+
 }
 
 /***
@@ -68,21 +76,19 @@ function getRandomQuote(quotes) {
 ***/
 function printQuote() {
   let quote = getRandomQuote(quotes);
-
-  document.getElementsByClassName('quote')[0].innerHTML= quote.quote;
-  document.getElementsByClassName('source')[0].innerHTML = quote.source;
-
-  if(quote.citation){
-    document.getElementsByClassName('citation')[0].innerHTML = quote.citation;
-  } else {
-    document.getElementsByClassName('citation')[0].innerHTML = " ";
+  console.log(quote);
+  let htmlStr = `<p class="quote">${quote.quote}</p>
+  <p class="source">${quote.source}`;
+  if(quote.citation) {
+    htmlStr +=`<span class="citation">${quote.citation}</span>`;
   }
-
-  if(quote.year) {
-      document.getElementsByClassName('year')[0].innerHTML = quote.year;
-  } else {
-    document.getElementsByClassName('year')[0].innerHTML = " ";
+  if(quote.year){
+    htmlStr +=`<span class="year">${quote.year}</span>`;
   }
+  htmlStr += '</p>'
+
+
+  document.getElementById('quote-box').innerHTML = htmlStr;
 
 
 
