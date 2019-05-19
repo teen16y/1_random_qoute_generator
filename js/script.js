@@ -79,9 +79,7 @@ function printQuote() {
   htmlStr += '</p>'
 
 
-  document.getElementById('quote-box').innerHTML = htmlStr;
-
-
+  document.querySelector('.quote-box').innerHTML = htmlStr;
 
 }
 
@@ -91,5 +89,5 @@ function printQuote() {
  Select the button element and add Event listener for click event ( it changes the quote printed)
 ***/
 
-let changeButton = document.getElementById('loadQuote');
+let changeButton = document.querySelector('.loadQuote');
 changeButton.addEventListener("click", printQuote, false);
