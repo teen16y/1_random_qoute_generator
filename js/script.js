@@ -38,6 +38,12 @@ let quotes = [
 
   },
 ]
+let ticking;
+function tick() {
+  ticking = setInterval(printQuote, 1000);
+}
+tick();
+
 
 /***
 Created getRandomQuote function
@@ -48,7 +54,7 @@ Created getRandomQuote function
 let prevIndex = 0 ;
 function getRandomQuote(quotes) {
   let index = Math.floor(Math.random()*quotes.length)
-  console.log(`prev: ${prevIndex} / index: ${index}`);
+  // console.log(`prev: ${prevIndex} / index: ${index}`);
   if( index !== prevIndex ) {
     prevIndex = index;
     return quotes[index];
@@ -82,6 +88,26 @@ function printQuote() {
   document.querySelector('.quote-box').innerHTML = htmlStr;
 
 }
+function reStart() {
+  tick();
+  document.querySelector('.go-on').innerHTML = "Stop";
+  document.querySelector('.go-on').className = "stop";
+  console.log("seq1");
+
+
+  stopButton = document.querySelector('.stop');
+  stopButton.addEventListener("click",clear , false);
+  console.log("seq2");
+
+}
+
+function clear() {
+  clearInterval(ticking);
+  document.querySelector('.stop').innerHTML = "Go on";
+  document.querySelector('.stop').className = "go-on";
+  goOnButton = document.querySelector('.go-on');
+  goOnButton.addEventListener("click",reStart , false);
+};
 
 
 
@@ -91,3 +117,9 @@ function printQuote() {
 
 let changeButton = document.querySelector('.loadQuote');
 changeButton.addEventListener("click", printQuote, false);
+
+
+let stopButton = document.querySelector('.stop');
+stopButton.addEventListener("click",clear , false);
+
+let goOnButton;
