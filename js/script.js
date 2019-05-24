@@ -45,6 +45,8 @@ function tick() {
 tick();
 
 
+
+
 /***
 Created getRandomQuote function
 1. It pick a quote from quotes array
@@ -88,26 +90,18 @@ function printQuote() {
   document.querySelector('.quote-box').innerHTML = htmlStr;
 
 }
-function reStart() {
-  tick();
-  document.querySelector('.go-on').innerHTML = "Stop";
-  document.querySelector('.go-on').className = "stop";
-  console.log("seq1");
 
-
-  stopButton = document.querySelector('.stop');
-  stopButton.addEventListener("click",clear , false);
-  console.log("seq2");
+function switchButton() {
+  let buttonName = document.querySelector('.switch').innerHTML;
+  if(buttonName === "Stop") {
+    switchB.innerHTML = "Go on";
+    clearInterval(ticking);
+  }else if (buttonName ==="Go on") {
+    switchB.innerHTML = "Stop";
+    tick();
+  }
 
 }
-
-function clear() {
-  clearInterval(ticking);
-  document.querySelector('.stop').innerHTML = "Go on";
-  document.querySelector('.stop').className = "go-on";
-  goOnButton = document.querySelector('.go-on');
-  goOnButton.addEventListener("click",reStart , false);
-};
 
 
 
@@ -115,11 +109,8 @@ function clear() {
  Select the button element and add Event listener for click event ( it changes the quote printed)
 ***/
 
-let changeButton = document.querySelector('.loadQuote');
-changeButton.addEventListener("click", printQuote, false);
+let loadButton = document.querySelector('.loadQuote');
+loadButton.addEventListener("click", printQuote, false);
 
-
-let stopButton = document.querySelector('.stop');
-stopButton.addEventListener("click",clear , false);
-
-let goOnButton;
+let switchB = document.querySelector('.switch');
+switchB.addEventListener("click", switchButton, false);
